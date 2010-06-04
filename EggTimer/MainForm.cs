@@ -5,17 +5,51 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Media;
 
 namespace EggTimer
 {
     public partial class MainForm : Form
     {
         public DateTime dtAlertTime;
+        public SoundPlayer sp;
 
         public MainForm()
         {
             InitializeComponent();
             dtAlertTime = new DateTime();
+            sp = new SoundPlayer();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            chkAudio.Checked = Properties.Settings.Default.AudioAlert;
+            txtMessage.Text = Properties.Settings.Default.MessageText;
+            txtFilename.Text = Properties.Settings.Default.AudioFilename;
+
+            switch (chkAudio.CheckState)
+            {
+                case CheckState.Checked:
+                    txtFilename.Enabled = true;
+                    btnBrowse.Enabled = true;
+                    btnPlay.Enabled = true;
+                    break;
+                case CheckState.Unchecked:
+                    txtFilename.Enabled = false;
+                    btnBrowse.Enabled = false;
+                    btnPlay.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.AudioAlert = chkAudio.Checked;
+            Properties.Settings.Default.AudioFilename = txtFilename.Text;
+            Properties.Settings.Default.MessageText = txtMessage.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -25,10 +59,20 @@ namespace EggTimer
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
+            foreach (Control ctrl in groupBox1.Controls)
+            {
+                ctrl.Enabled = false;
+            }
+
             dtAlertTime = DateTime.Now
                 .AddHours((double)nudHours.Value)
                 .AddMinutes((double)nudMinutes.Value);
             tmrUpdate.Start();
+
+            if (chkHide.Checked)
+            {
+                Minimize();
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -38,6 +82,9 @@ namespace EggTimer
 
         private void tmrUpdate_Tick(object sender, EventArgs e)
         {
+            TimeSpan ts = dtAlertTime - DateTime.Now;
+            lblCountdown.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                ts.Hours, ts.Minutes, ts.Seconds);
             if (dtAlertTime.Hour == DateTime.Now.Hour &&
                 dtAlertTime.Minute == DateTime.Now.Minute &&
                 dtAlertTime.Second == DateTime.Now.Second)
@@ -45,9 +92,70 @@ namespace EggTimer
                 Stop();
                 Alert();
             }
-            TimeSpan ts = dtAlertTime - DateTime.Now;
-            lblCountdown.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
-                ts.Hours, ts.Minutes, ts.Seconds);
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (ofdAudio.ShowDialog() == DialogResult.OK)
+            {
+                txtFilename.Text = ofdAudio.FileName;
+            }
+        }
+
+        private void chkAudio_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (chkAudio.CheckState)
+            {
+                case CheckState.Checked:
+                    txtFilename.Enabled = true;
+                    btnBrowse.Enabled = true;
+                    btnPlay.Enabled = true;
+                    break;
+                case CheckState.Unchecked:
+                    txtFilename.Enabled = false;
+                    btnBrowse.Enabled = false;
+                    btnPlay.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Minimize();
+            }
+            else
+            {
+                Restore();
+            }
+        }
+
+        private void miRestore_Click(object sender, EventArgs e)
+        {
+            Restore();
+        }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Play()
+        {
+            if (System.IO.File.Exists(txtFilename.Text))
+            {
+                sp.SoundLocation = txtFilename.Text;
+                sp.Play();
+            }
         }
 
         private void Stop()
@@ -58,11 +166,38 @@ namespace EggTimer
             btnStop.Enabled = false;
             tmrUpdate.Stop();
             lblCountdown.Text = "00:00:00";
+
+            foreach (Control ctrl in groupBox1.Controls)
+            {
+                ctrl.Enabled = true;
+            }
         }
 
         private void Alert()
         {
-            MessageBox.Show("Times Up!");
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Restore();
+            }
+            MessageBox.Show(txtMessage.Text);
+            if (chkAudio.Checked)
+            {
+                Play();
+            }
+        }
+
+        private void Restore()
+        {
+            this.Visible = true;
+            niTray.Visible = false;
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void Minimize()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            niTray.Visible = true;
         }
     }
 }
