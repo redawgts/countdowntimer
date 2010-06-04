@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Media;
 
-namespace EggTimer
+namespace CountdownTimer
 {
     public partial class MainForm : Form
     {
@@ -83,8 +83,13 @@ namespace EggTimer
         private void tmrUpdate_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = dtAlertTime - DateTime.Now;
-            lblCountdown.Text = String.Format("{0:D2}:{1:D2}:{2:D2}",
+            string msg = String.Format("{0:D2}:{1:D2}:{2:D2}",
                 ts.Hours, ts.Minutes, ts.Seconds);
+            
+            lblCountdown.Text = msg;
+            niTray.BalloonTipText = msg;
+            niTray.Text = msg;
+            
             if (dtAlertTime.Hour == DateTime.Now.Hour &&
                 dtAlertTime.Minute == DateTime.Now.Minute &&
                 dtAlertTime.Second == DateTime.Now.Second)
@@ -203,6 +208,14 @@ namespace EggTimer
         private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Restore();
+        }
+
+        private void niTray_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                niTray.ShowBalloonTip(5000);
+            }
         }
     }
 }

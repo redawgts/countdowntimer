@@ -7,12 +7,12 @@
     <ProjectGuid>{48847933-9BFD-4C1B-96B7-1A76980AA376}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EggTimer</RootNamespace>
-    <AssemblyName>EggTimer</AssemblyName>
+    <RootNamespace>CountdownTimer</RootNamespace>
+    <AssemblyName>CountdownTimer</AssemblyName>
     <ApplicationIcon>clock.ico</ApplicationIcon>
-    <StartupObject>EggTimer.Program</StartupObject>
+    <StartupObject>CountdownTimer.Program</StartupObject>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>EggTimer.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Countdown Timer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,9 +62,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="EggTimer.snk" />
+    <None Include="Countdown Timer.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

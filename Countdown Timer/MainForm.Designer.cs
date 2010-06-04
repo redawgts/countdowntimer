@@ -1,4 +1,4 @@
-namespace EggTimer
+namespace CountdownTimer
 {
     partial class MainForm
     {
@@ -217,20 +217,20 @@ namespace EggTimer
             // txtFilename
             // 
             this.txtFilename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilename.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::EggTimer.Properties.Settings.Default, "AudioFilename", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtFilename.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::CountdownTimer.Properties.Settings.Default, "AudioFilename", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtFilename.Enabled = false;
             this.txtFilename.Location = new System.Drawing.Point(89, 30);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(275, 20);
             this.txtFilename.TabIndex = 10;
-            this.txtFilename.Text = global::EggTimer.Properties.Settings.Default.AudioFilename;
+            this.txtFilename.Text = global::CountdownTimer.Properties.Settings.Default.AudioFilename;
             // 
             // chkAudio
             // 
             this.chkAudio.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkAudio.AutoSize = true;
-            this.chkAudio.Checked = global::EggTimer.Properties.Settings.Default.AudioAlert;
-            this.chkAudio.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::EggTimer.Properties.Settings.Default, "AudioAlert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkAudio.Checked = global::CountdownTimer.Properties.Settings.Default.AudioAlert;
+            this.chkAudio.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::CountdownTimer.Properties.Settings.Default, "AudioAlert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkAudio.Location = new System.Drawing.Point(3, 32);
             this.chkAudio.Name = "chkAudio";
             this.chkAudio.Size = new System.Drawing.Size(80, 17);
@@ -243,12 +243,12 @@ namespace EggTimer
             // 
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.txtMessage, 3);
-            this.txtMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::EggTimer.Properties.Settings.Default, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::CountdownTimer.Properties.Settings.Default, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtMessage.Location = new System.Drawing.Point(89, 3);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(333, 20);
             this.txtMessage.TabIndex = 9;
-            this.txtMessage.Text = global::EggTimer.Properties.Settings.Default.MessageText;
+            this.txtMessage.Text = global::CountdownTimer.Properties.Settings.Default.MessageText;
             // 
             // btnBrowse
             // 
@@ -276,9 +276,9 @@ namespace EggTimer
             // chkHide
             // 
             this.chkHide.AutoSize = true;
-            this.chkHide.Checked = global::EggTimer.Properties.Settings.Default.HideOnStart;
+            this.chkHide.Checked = global::CountdownTimer.Properties.Settings.Default.HideOnStart;
             this.tableLayoutPanel2.SetColumnSpan(this.chkHide, 4);
-            this.chkHide.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::EggTimer.Properties.Settings.Default, "HideOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkHide.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::CountdownTimer.Properties.Settings.Default, "HideOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkHide.Location = new System.Drawing.Point(3, 58);
             this.chkHide.Name = "chkHide";
             this.chkHide.Size = new System.Drawing.Size(92, 16);
@@ -308,6 +308,7 @@ namespace EggTimer
             this.niTray.ContextMenuStrip = this.msTray;
             this.niTray.Icon = ((System.Drawing.Icon)(resources.GetObject("niTray.Icon")));
             this.niTray.Text = "Egg Timer";
+            this.niTray.MouseClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseClick);
             this.niTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseDoubleClick);
             // 
             // msTray
@@ -317,25 +318,25 @@ namespace EggTimer
             this.toolStripMenuItem1,
             this.miExit});
             this.msTray.Name = "msTray";
-            this.msTray.Size = new System.Drawing.Size(182, 54);
+            this.msTray.Size = new System.Drawing.Size(174, 54);
             // 
             // miRestore
             // 
             this.miRestore.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.miRestore.Name = "miRestore";
-            this.miRestore.Size = new System.Drawing.Size(181, 22);
+            this.miRestore.Size = new System.Drawing.Size(173, 22);
             this.miRestore.Text = "&Restore Window";
             this.miRestore.Click += new System.EventHandler(this.miRestore_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(181, 22);
+            this.miExit.Size = new System.Drawing.Size(173, 22);
             this.miExit.Text = "E&xit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -353,7 +354,7 @@ namespace EggTimer
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Egg Timer";
+            this.Text = "Countdown Timer";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

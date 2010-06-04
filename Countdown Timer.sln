@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EggTimer", "EggTimer\EggTimer.csproj", "{48847933-9BFD-4C1B-96B7-1A76980AA376}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EggTimer", "Countdown Timer\Countdown Timer.csproj", "{48847933-9BFD-4C1B-96B7-1A76980AA376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
