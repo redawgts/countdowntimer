@@ -29,7 +29,6 @@ namespace CountdownTimer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lblCountdown = new System.Windows.Forms.Label();
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -307,9 +306,9 @@ namespace CountdownTimer
             // 
             // niTray
             // 
+            this.niTray.BalloonTipText = "Countdown Timer";
             this.niTray.ContextMenuStrip = this.msTray;
-            this.niTray.Icon = ((System.Drawing.Icon)(resources.GetObject("niTray.Icon")));
-            this.niTray.Text = "Egg Timer";
+            this.niTray.Text = "Countdown Timer";
             this.niTray.MouseClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseClick);
             this.niTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseDoubleClick);
             // 
@@ -321,6 +320,7 @@ namespace CountdownTimer
             this.miExit});
             this.msTray.Name = "msTray";
             this.msTray.Size = new System.Drawing.Size(174, 54);
+            this.msTray.Text = "Countdown Timer";
             // 
             // miRestore
             // 
@@ -366,7 +366,6 @@ namespace CountdownTimer
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblCountdown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

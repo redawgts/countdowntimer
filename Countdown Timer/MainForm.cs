@@ -72,6 +72,8 @@ namespace CountdownTimer
         public MainForm(string[] args)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.clock_xp;
+            niTray.Icon = Properties.Resources.clock_xp;
             dtAlertTime = new DateTime();
             plr = new WindowsMediaPlayer();
             txtMessage.Text = Properties.Settings.Default.MessageText;

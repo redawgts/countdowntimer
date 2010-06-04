@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Countdown Timer")]
 [assembly: AssemblyDescription("A countdown timer.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Joshua Camara")]
+[assembly: AssemblyCompany("RedawgTS")]
 [assembly: AssemblyProduct("Countdown Timer")]
-[assembly: AssemblyCopyright("Joshua Camara")]
+[assembly: AssemblyCopyright("RedawgTS 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

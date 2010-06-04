@@ -59,5 +59,19 @@ namespace CountdownTimer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Icon clock_vista {
+            get {
+                object obj = ResourceManager.GetObject("clock_vista", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon clock_xp {
+            get {
+                object obj = ResourceManager.GetObject("clock_xp", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CountdownTimer</RootNamespace>
     <AssemblyName>CountdownTimer</AssemblyName>
-    <ApplicationIcon>clock.ico</ApplicationIcon>
+    <ApplicationIcon>clock_xp.ico</ApplicationIcon>
     <StartupObject>CountdownTimer.Program</StartupObject>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Countdown Timer.snk</AssemblyOriginatorKeyFile>
@@ -82,9 +82,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="clock.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="WMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -93,6 +90,12 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="clock_vista.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="clock_xp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
