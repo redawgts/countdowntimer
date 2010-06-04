@@ -55,6 +55,7 @@ namespace CountdownTimer
             this.miRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -318,33 +319,47 @@ namespace CountdownTimer
             this.toolStripMenuItem1,
             this.miExit});
             this.msTray.Name = "msTray";
-            this.msTray.Size = new System.Drawing.Size(174, 54);
+            this.msTray.Size = new System.Drawing.Size(185, 54);
             // 
             // miRestore
             // 
             this.miRestore.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.miRestore.Name = "miRestore";
-            this.miRestore.Size = new System.Drawing.Size(173, 22);
+            this.miRestore.Size = new System.Drawing.Size(184, 22);
             this.miRestore.Text = "&Restore Window";
             this.miRestore.Click += new System.EventHandler(this.miRestore_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(173, 22);
+            this.miExit.Size = new System.Drawing.Size(184, 22);
             this.miExit.Text = "E&xit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnNew.Location = new System.Drawing.Point(438, 0);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(23, 21);
+            this.btnNew.TabIndex = 13;
+            this.btnNew.Text = "2";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 290);
+            this.Controls.Add(this.btnNew);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -357,7 +372,6 @@ namespace CountdownTimer
             this.Text = "Countdown Timer";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -397,6 +411,7 @@ namespace CountdownTimer
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.CheckBox chkHide;
+        private System.Windows.Forms.Button btnNew;
     }
 }
 

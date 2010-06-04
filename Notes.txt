@@ -1,0 +1,9 @@
+Countdown Timer
+
+* Add MP3/WMA support
+* Add 'Start New Instance' Button
+* Add Command Line Options
+* Add message text to tray tooltip
+* 
+
+'Start New Instance' returns SecurityException. Doesn't work across the network.

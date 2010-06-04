@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Media;
+using System.Diagnostics;
 
 namespace CountdownTimer
 {
@@ -14,17 +15,39 @@ namespace CountdownTimer
         public DateTime dtAlertTime;
         public SoundPlayer sp;
 
-        public MainForm()
+        public MainForm(string[] args)
         {
             InitializeComponent();
             dtAlertTime = new DateTime();
             sp = new SoundPlayer();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            chkAudio.Checked = Properties.Settings.Default.AudioAlert;
             txtMessage.Text = Properties.Settings.Default.MessageText;
+            nudHours.Value = 0;
+            nudMinutes.Value = 0;
+
+            foreach (string arg in args)
+            {
+                try
+                {
+                    if (arg.StartsWith("-m"))
+                    {
+                        txtMessage.Text = arg.Substring(2);
+                    }
+                    else if (arg.StartsWith("-th"))
+                    {
+                        nudHours.Value = int.Parse(arg.Substring(3));
+                    }
+                    else if (arg.StartsWith("-th"))
+                    {
+                        nudMinutes.Value = int.Parse(arg.Substring(3));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Do Nothing
+                }
+            }
+
+            chkAudio.Checked = Properties.Settings.Default.AudioAlert;
             txtFilename.Text = Properties.Settings.Default.AudioFilename;
 
             switch (chkAudio.CheckState)
@@ -83,8 +106,8 @@ namespace CountdownTimer
         private void tmrUpdate_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = dtAlertTime - DateTime.Now;
-            string msg = String.Format("{0:D2}:{1:D2}:{2:D2}",
-                ts.Hours, ts.Minutes, ts.Seconds);
+            string msg = String.Format("{0:D2}:{1:D2}:{2:D2} - {3}",
+                ts.Hours, ts.Minutes, ts.Seconds, txtMessage.Text);
             
             lblCountdown.Text = msg;
             niTray.BalloonTipText = msg;
@@ -215,6 +238,19 @@ namespace CountdownTimer
             if (e.Button == MouseButtons.Left)
             {
                 niTray.ShowBalloonTip(5000);
+            }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(Application.ExecutablePath);
+                Process.Start(Application.ExecutablePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
