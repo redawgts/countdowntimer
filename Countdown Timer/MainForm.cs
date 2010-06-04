@@ -1,28 +1,29 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Media;
 using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using WMPLib;
 
 namespace CountdownTimer
 {
     public partial class MainForm : Form
     {
-        public DateTime dtAlertTime;
-        public WindowsMediaPlayer plr = null;
+        DateTime dtAlertTime;
+        WindowsMediaPlayer wmp = null;
 
+        #region • Methods •
 
-        private void Play()
+        private void PlayPause()
         {
-            if (System.IO.File.Exists(txtFilename.Text))
+            if (wmp.playState == WMPPlayState.wmppsPlaying)
             {
-                plr.URL = txtFilename.Text;
-                plr.controls.play();
+                wmp.controls.stop();
+            }
+            else if (System.IO.File.Exists(txtFilename.Text))
+            {
+                wmp.URL = txtFilename.Text;
+                wmp.controls.play();
             }
         }
 
@@ -35,7 +36,7 @@ namespace CountdownTimer
             tmrUpdate.Stop();
             lblCountdown.Text = "00:00:00";
 
-            foreach (Control ctrl in groupBox1.Controls)
+            foreach (Control ctrl in tableLayoutPanel2.Controls)
             {
                 ctrl.Enabled = true;
             }
@@ -43,15 +44,15 @@ namespace CountdownTimer
 
         private void Alert()
         {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                Restore();
-            }
+            Restore();
             if (chkAudio.Checked)
             {
-                Play();
+                PlayPause();
             }
-            MessageBox.Show(txtMessage.Text);
+            if (MessageBox.Show(txtMessage.Text) == DialogResult.OK)
+            {
+                PlayPause();
+            }
         }
 
         private void Restore()
@@ -68,15 +69,22 @@ namespace CountdownTimer
             niTray.Visible = true;
         }
 
+        #endregion • Methods •
+
+        #region • Event Handlers •
+
+
+        #region MainForm
 
         public MainForm(string[] args)
         {
             InitializeComponent();
-            this.Icon = Properties.Resources.clock_xp;
-            niTray.Icon = Properties.Resources.clock_xp;
             dtAlertTime = new DateTime();
-            plr = new WindowsMediaPlayer();
-            txtMessage.Text = Properties.Settings.Default.MessageText;
+            wmp = new WindowsMediaPlayer();
+            wmp.PlayStateChange += new _WMPOCXEvents_PlayStateChangeEventHandler(wmp_PlayStateChange);
+            this.Icon = Properties.Resources.clock;
+            niTray.Icon = Properties.Resources.clock;
+
             nudHours.Value = 0;
             nudMinutes.Value = 0;
 
@@ -97,14 +105,20 @@ namespace CountdownTimer
                         nudMinutes.Value = int.Parse(arg.Substring(3));
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    // Do Nothing
                 }
             }
+        }
 
-            chkAudio.Checked = Properties.Settings.Default.AudioAlert;
-            txtFilename.Text = Properties.Settings.Default.AudioFilename;
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            AppSettings Settings = AppSettings.Load();
+            this.Location = Settings.Location;
+            txtFilename.Text = Settings.AudioFilename;
+            txtMessage.Text = Settings.MessageText;
+            chkAudio.Checked = Settings.AudioAlert;
+            chkHide.Checked = Settings.HideOnStart;
 
             switch (chkAudio.CheckState)
             {
@@ -125,10 +139,13 @@ namespace CountdownTimer
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.AudioAlert = chkAudio.Checked;
-            Properties.Settings.Default.AudioFilename = txtFilename.Text;
-            Properties.Settings.Default.MessageText = txtMessage.Text;
-            Properties.Settings.Default.Save();
+            AppSettings Settings = AppSettings.Load();
+            Settings.Location = this.Location;
+            Settings.AudioAlert = chkAudio.Checked;
+            Settings.AudioFilename = txtFilename.Text;
+            Settings.MessageText = txtMessage.Text;
+            Settings.HideOnStart = chkHide.Checked;
+            Settings.Save();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -143,6 +160,10 @@ namespace CountdownTimer
             }
         }
 
+        #endregion MainWindow
+
+
+        #region Buttons
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -151,9 +172,10 @@ namespace CountdownTimer
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
-            foreach (Control ctrl in groupBox1.Controls)
+            foreach (Control ctrl in tableLayoutPanel2.Controls)
             {
-                ctrl.Enabled = false;
+                if (ctrl.Name != "btnNew")
+                    ctrl.Enabled = false;
             }
 
             dtAlertTime = DateTime.Now
@@ -182,14 +204,13 @@ namespace CountdownTimer
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            Play();
+            PlayPause();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             try
             {
-                MessageBox.Show(Application.ExecutablePath);
                 Process.Start(Application.ExecutablePath);
             }
             catch (Exception ex)
@@ -198,12 +219,59 @@ namespace CountdownTimer
             }
         }
 
+        #endregion Buttons
+
+
+        #region Context Menu
+
+        private void miRestore_Click(object sender, EventArgs e)
+        {
+            Restore();
+        }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        #endregion Context Menu
+
+
+        #region TrayIcon
+
+        private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Restore();
+        }
+
+        private void niTray_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                niTray.ShowBalloonTip(5000);
+            }
+        }
+
+        #endregion TrayIcon
+
+
+        #region Other Events
+
+        void wmp_PlayStateChange(int NewState)
+        {
+            if (NewState == (int)WMPPlayState.wmppsPlaying)
+                btnPlay.Text = "<";
+            else if (NewState == (int)WMPPlayState.wmppsStopped)
+                btnPlay.Text = "4";
+            else
+                btnPlay.Text = "4";
+        }
 
         private void tmrUpdate_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = dtAlertTime - DateTime.Now;
-            string msg = String.Format("{0:D2}:{1:D2}:{2:D2} - {3}",
-                ts.Hours, ts.Minutes, ts.Seconds, txtMessage.Text);
+            string msg = String.Format("{0:D2}:{1:D2}:{2:D2}",
+                ts.Hours, ts.Minutes, ts.Seconds);
 
             lblCountdown.Text = msg;
             niTray.BalloonTipText = msg;
@@ -238,30 +306,60 @@ namespace CountdownTimer
 
         }
 
-
-        private void miRestore_Click(object sender, EventArgs e)
-        {
-            Restore();
-        }
-
-        private void miExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        #endregion Other Events
 
 
-        private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Restore();
-        }
+        #endregion • Event Handlers •
 
-        private void niTray_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                niTray.ShowBalloonTip(5000);
-            }
-        }
+        #region • Add Button To Title Bar (Not working) •
+
+        //[DllImport("user32.dll")]
+        //public static extern IntPtr GetWindowDC(IntPtr hWnd);
+
+        //[DllImport("user32.dll")]
+        //public static extern IntPtr GetDC(IntPtr hWnd);
+
+        //[DllImport("user32.dll")]
+        //public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+        //public const int WM_NCPAINT = 0x0085;
+
+
+        //protected override void WndProc(ref Message m)
+        //{
+        //    switch (m.Msg)
+        //    {
+        //        case WM_NCPAINT:
+        //            {
+        //                base.WndProc(ref m);
+        //                IntPtr hDC = GetWindowDC(m.HWnd);
+        //                Graphics g = Graphics.FromHdc(hDC);
+        //                PaintNC(m.HWnd);
+        //                g.Dispose();
+        //                ReleaseDC(m.HWnd, hDC);
+        //                m.Result = IntPtr.Zero;
+        //            }
+        //            break;
+        //        default:
+        //            base.WndProc(ref m);
+        //            break;
+        //    }
+        //}
+
+        //protected void PaintNC(IntPtr hWnd)
+        //{
+        //    IntPtr hDC = GetWindowDC(hWnd);
+        //    Graphics g = Graphics.FromHdc(hDC);
+        //    int CaptionHeight = Bounds.Height - ClientRectangle.Height; // Title bar
+        //    Size CloseButtonSize = SystemInformation.CaptionButtonSize;
+        //    int X = Bounds.Width - 4 - CloseButtonSize.Width * 2;
+        //    int Y = 6;
+        //    ControlPaint.DrawButton(g, X, Y, 15, 14, ButtonState.Normal);
+        //    g.Dispose();
+        //    ReleaseDC(hWnd, hDC);
+        //}
+
+        #endregion • Add Button To Title Bar (Not working) •
 
     }
 }

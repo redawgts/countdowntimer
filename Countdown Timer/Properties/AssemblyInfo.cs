@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -8,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Countdown Timer")]
 [assembly: AssemblyDescription("A countdown timer.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("RedawgTS")]
+[assembly: AssemblyCompany("Joshua Camara")]
 [assembly: AssemblyProduct("Countdown Timer")]
-[assembly: AssemblyCopyright("RedawgTS 2008")]
+[assembly: AssemblyCopyright("Copyright © 2008-2010 Joshua Camara")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +30,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.4.*")]
-[assembly: AssemblyFileVersion("1.4.0.0")]
+[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyFileVersion("1.5.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("en")]

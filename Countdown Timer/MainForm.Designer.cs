@@ -65,12 +65,16 @@ namespace CountdownTimer
             // 
             // lblCountdown
             // 
-            this.lblCountdown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblCountdown.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountdown.BackColor = System.Drawing.Color.Black;
+            this.lblCountdown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountdown.ForeColor = System.Drawing.Color.Lime;
             this.lblCountdown.Location = new System.Drawing.Point(12, 9);
             this.lblCountdown.Name = "lblCountdown";
-            this.lblCountdown.Size = new System.Drawing.Size(437, 112);
+            this.lblCountdown.Size = new System.Drawing.Size(339, 55);
             this.lblCountdown.TabIndex = 0;
             this.lblCountdown.Text = "00:00:00";
             this.lblCountdown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,12 +85,12 @@ namespace CountdownTimer
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Location = new System.Drawing.Point(12, 124);
+            this.panel1.Location = new System.Drawing.Point(12, 72);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(437, 10);
+            this.panel1.Size = new System.Drawing.Size(420, 5);
             this.panel1.TabIndex = 1;
             // 
             // nudHours
@@ -132,8 +136,8 @@ namespace CountdownTimer
             // 
             // btnStart
             // 
-            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnStart.Location = new System.Drawing.Point(278, 3);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Location = new System.Drawing.Point(357, 12);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 6;
@@ -143,34 +147,31 @@ namespace CountdownTimer
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.btnStop, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnStart, 4, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
             this.tableLayoutPanel1.Controls.Add(this.nudMinutes, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.nudHours, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 140);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 83);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 30);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(420, 30);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // btnStop
             // 
-            this.btnStop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(359, 3);
+            this.btnStop.Location = new System.Drawing.Point(357, 41);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 7;
@@ -200,6 +201,7 @@ namespace CountdownTimer
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtFilename, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnNew, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.chkAudio, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtMessage, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnBrowse, 2, 1);
@@ -211,26 +213,22 @@ namespace CountdownTimer
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(425, 77);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(408, 79);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
             // txtFilename
             // 
             this.txtFilename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilename.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::CountdownTimer.Properties.Settings.Default, "AudioFilename", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtFilename.Enabled = false;
             this.txtFilename.Location = new System.Drawing.Point(89, 30);
             this.txtFilename.Name = "txtFilename";
-            this.txtFilename.Size = new System.Drawing.Size(275, 20);
+            this.txtFilename.Size = new System.Drawing.Size(258, 20);
             this.txtFilename.TabIndex = 10;
-            this.txtFilename.Text = global::CountdownTimer.Properties.Settings.Default.AudioFilename;
             // 
             // chkAudio
             // 
             this.chkAudio.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkAudio.AutoSize = true;
-            this.chkAudio.Checked = global::CountdownTimer.Properties.Settings.Default.AudioAlert;
-            this.chkAudio.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::CountdownTimer.Properties.Settings.Default, "AudioAlert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkAudio.Location = new System.Drawing.Point(3, 32);
             this.chkAudio.Name = "chkAudio";
             this.chkAudio.Size = new System.Drawing.Size(80, 17);
@@ -243,17 +241,15 @@ namespace CountdownTimer
             // 
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.SetColumnSpan(this.txtMessage, 3);
-            this.txtMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::CountdownTimer.Properties.Settings.Default, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtMessage.Location = new System.Drawing.Point(89, 3);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(333, 20);
+            this.txtMessage.Size = new System.Drawing.Size(316, 20);
             this.txtMessage.TabIndex = 9;
-            this.txtMessage.Text = global::CountdownTimer.Properties.Settings.Default.MessageText;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(370, 29);
+            this.btnBrowse.Location = new System.Drawing.Point(353, 29);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(23, 23);
             this.btnBrowse.TabIndex = 12;
@@ -264,37 +260,34 @@ namespace CountdownTimer
             // btnPlay
             // 
             this.btnPlay.Enabled = false;
-            this.btnPlay.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnPlay.Location = new System.Drawing.Point(399, 29);
+            this.btnPlay.Font = new System.Drawing.Font("Webdings", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnPlay.Location = new System.Drawing.Point(382, 29);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(23, 23);
             this.btnPlay.TabIndex = 13;
-            this.btnPlay.Text = "8";
+            this.btnPlay.Text = "4";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // chkHide
             // 
             this.chkHide.AutoSize = true;
-            this.chkHide.Checked = global::CountdownTimer.Properties.Settings.Default.HideOnStart;
-            this.tableLayoutPanel2.SetColumnSpan(this.chkHide, 4);
-            this.chkHide.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::CountdownTimer.Properties.Settings.Default, "HideOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tableLayoutPanel2.SetColumnSpan(this.chkHide, 2);
             this.chkHide.Location = new System.Drawing.Point(3, 58);
             this.chkHide.Name = "chkHide";
-            this.chkHide.Size = new System.Drawing.Size(92, 16);
+            this.chkHide.Size = new System.Drawing.Size(92, 17);
             this.chkHide.TabIndex = 14;
             this.chkHide.Text = "Hide on start?";
             this.chkHide.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 176);
+            this.groupBox1.Location = new System.Drawing.Point(12, 119);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(437, 102);
+            this.groupBox1.Size = new System.Drawing.Size(420, 104);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -344,12 +337,11 @@ namespace CountdownTimer
             // 
             // btnNew
             // 
-            this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnNew.Location = new System.Drawing.Point(438, 0);
+            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNew.Font = new System.Drawing.Font("Marlett", 8.25F);
+            this.btnNew.Location = new System.Drawing.Point(382, 58);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(23, 21);
+            this.btnNew.Size = new System.Drawing.Size(23, 18);
             this.btnNew.TabIndex = 13;
             this.btnNew.Text = "2";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -359,18 +351,20 @@ namespace CountdownTimer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 290);
-            this.Controls.Add(this.btnNew);
+            this.ClientSize = new System.Drawing.Size(444, 235);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.lblCountdown);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblCountdown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Countdown Timer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.nudHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).EndInit();
