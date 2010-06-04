@@ -42,8 +42,12 @@ namespace EggTimer
             this.btnStop = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtFilename = new System.Windows.Forms.TextBox();
+            this.chkAudio = new System.Windows.Forms.CheckBox();
+            this.txtMessage = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.chkHide = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ofdAudio = new System.Windows.Forms.OpenFileDialog();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
@@ -51,10 +55,6 @@ namespace EggTimer
             this.miRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtFilename = new System.Windows.Forms.TextBox();
-            this.chkAudio = new System.Windows.Forms.CheckBox();
-            this.txtMessage = new System.Windows.Forms.TextBox();
-            this.chkHide = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -162,7 +162,7 @@ namespace EggTimer
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 30);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
@@ -214,80 +214,6 @@ namespace EggTimer
             this.tableLayoutPanel2.Size = new System.Drawing.Size(425, 77);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(370, 29);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(23, 23);
-            this.btnBrowse.TabIndex = 12;
-            this.btnBrowse.Text = "...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Enabled = false;
-            this.btnPlay.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnPlay.Location = new System.Drawing.Point(399, 29);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(23, 23);
-            this.btnPlay.TabIndex = 13;
-            this.btnPlay.Text = "8";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 176);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(437, 102);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Settings";
-            // 
-            // ofdAudio
-            // 
-            this.ofdAudio.Filter = "Wave files (*.wav)|*.wav|All files (*.*)|*.*";
-            // 
-            // niTray
-            // 
-            this.niTray.ContextMenuStrip = this.msTray;
-            this.niTray.Icon = ((System.Drawing.Icon)(resources.GetObject("niTray.Icon")));
-            this.niTray.Text = "Egg Timer";
-            // 
-            // msTray
-            // 
-            this.msTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miRestore,
-            this.toolStripMenuItem1,
-            this.miExit});
-            this.msTray.Name = "msTray";
-            this.msTray.Size = new System.Drawing.Size(165, 54);
-            // 
-            // miRestore
-            // 
-            this.miRestore.Name = "miRestore";
-            this.miRestore.Size = new System.Drawing.Size(164, 22);
-            this.miRestore.Text = "&Restore Window";
-            this.miRestore.Click += new System.EventHandler(this.miRestore_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(161, 6);
-            // 
-            // miExit
-            // 
-            this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(164, 22);
-            this.miExit.Text = "E&xit";
-            this.miExit.Click += new System.EventHandler(this.miExit_Click);
-            // 
             // txtFilename
             // 
             this.txtFilename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -324,6 +250,29 @@ namespace EggTimer
             this.txtMessage.TabIndex = 9;
             this.txtMessage.Text = global::EggTimer.Properties.Settings.Default.MessageText;
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Enabled = false;
+            this.btnBrowse.Location = new System.Drawing.Point(370, 29);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(23, 23);
+            this.btnBrowse.TabIndex = 12;
+            this.btnBrowse.Text = "...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Enabled = false;
+            this.btnPlay.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnPlay.Location = new System.Drawing.Point(399, 29);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(23, 23);
+            this.btnPlay.TabIndex = 13;
+            this.btnPlay.Text = "8";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
             // chkHide
             // 
             this.chkHide.AutoSize = true;
@@ -336,6 +285,59 @@ namespace EggTimer
             this.chkHide.TabIndex = 14;
             this.chkHide.Text = "Hide on start?";
             this.chkHide.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 176);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(437, 102);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Settings";
+            // 
+            // ofdAudio
+            // 
+            this.ofdAudio.Filter = "Wave files (*.wav)|*.wav|All files (*.*)|*.*";
+            // 
+            // niTray
+            // 
+            this.niTray.ContextMenuStrip = this.msTray;
+            this.niTray.Icon = ((System.Drawing.Icon)(resources.GetObject("niTray.Icon")));
+            this.niTray.Text = "Egg Timer";
+            this.niTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseDoubleClick);
+            // 
+            // msTray
+            // 
+            this.msTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miRestore,
+            this.toolStripMenuItem1,
+            this.miExit});
+            this.msTray.Name = "msTray";
+            this.msTray.Size = new System.Drawing.Size(182, 54);
+            // 
+            // miRestore
+            // 
+            this.miRestore.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.miRestore.Name = "miRestore";
+            this.miRestore.Size = new System.Drawing.Size(181, 22);
+            this.miRestore.Text = "&Restore Window";
+            this.miRestore.Click += new System.EventHandler(this.miRestore_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 6);
+            // 
+            // miExit
+            // 
+            this.miExit.Name = "miExit";
+            this.miExit.Size = new System.Drawing.Size(181, 22);
+            this.miExit.Text = "E&xit";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
             // MainForm
             // 

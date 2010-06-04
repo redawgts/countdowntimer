@@ -199,5 +199,10 @@ namespace EggTimer
             this.Visible = false;
             niTray.Visible = true;
         }
+
+        private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Restore();
+        }
     }
 }
