@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EggTimer")]
-[assembly: AssemblyDescription("A simple egg timer.")]
+[assembly: AssemblyTitle("Countdown Timer")]
+[assembly: AssemblyDescription("A countdown timer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Joshua Camara")]
-[assembly: AssemblyProduct("EggTimer")]
-[assembly: AssemblyCopyright("Copyright © Joshua Camara 2007")]
+[assembly: AssemblyProduct("Countdown Timer")]
+[assembly: AssemblyCopyright("Joshua Camara")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.4.*")]
+[assembly: AssemblyFileVersion("1.4.0.0")]

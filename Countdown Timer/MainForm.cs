@@ -7,19 +7,73 @@ using System.Text;
 using System.Windows.Forms;
 using System.Media;
 using System.Diagnostics;
+using WMPLib;
 
 namespace CountdownTimer
 {
     public partial class MainForm : Form
     {
         public DateTime dtAlertTime;
-        public SoundPlayer sp;
+        public WindowsMediaPlayer plr = null;
+
+
+        private void Play()
+        {
+            if (System.IO.File.Exists(txtFilename.Text))
+            {
+                plr.URL = txtFilename.Text;
+                plr.controls.play();
+            }
+        }
+
+        private void Stop()
+        {
+            nudHours.Enabled = true;
+            nudMinutes.Enabled = true;
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+            tmrUpdate.Stop();
+            lblCountdown.Text = "00:00:00";
+
+            foreach (Control ctrl in groupBox1.Controls)
+            {
+                ctrl.Enabled = true;
+            }
+        }
+
+        private void Alert()
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Restore();
+            }
+            if (chkAudio.Checked)
+            {
+                Play();
+            }
+            MessageBox.Show(txtMessage.Text);
+        }
+
+        private void Restore()
+        {
+            this.Visible = true;
+            niTray.Visible = false;
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void Minimize()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            niTray.Visible = true;
+        }
+
 
         public MainForm(string[] args)
         {
             InitializeComponent();
             dtAlertTime = new DateTime();
-            sp = new SoundPlayer();
+            plr = new WindowsMediaPlayer();
             txtMessage.Text = Properties.Settings.Default.MessageText;
             nudHours.Value = 0;
             nudMinutes.Value = 0;
@@ -36,7 +90,7 @@ namespace CountdownTimer
                     {
                         nudHours.Value = int.Parse(arg.Substring(3));
                     }
-                    else if (arg.StartsWith("-th"))
+                    else if (arg.StartsWith("-tm"))
                     {
                         nudMinutes.Value = int.Parse(arg.Substring(3));
                     }
@@ -75,6 +129,19 @@ namespace CountdownTimer
             Properties.Settings.Default.Save();
         }
 
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Minimize();
+            }
+            else
+            {
+                Restore();
+            }
+        }
+
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             nudHours.Enabled = false;
@@ -103,30 +170,49 @@ namespace CountdownTimer
             Stop();
         }
 
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (ofdAudio.ShowDialog() == DialogResult.OK)
+            {
+                txtFilename.Text = ofdAudio.FileName;
+            }
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(Application.ExecutablePath);
+                Process.Start(Application.ExecutablePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
         private void tmrUpdate_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = dtAlertTime - DateTime.Now;
             string msg = String.Format("{0:D2}:{1:D2}:{2:D2} - {3}",
                 ts.Hours, ts.Minutes, ts.Seconds, txtMessage.Text);
-            
+
             lblCountdown.Text = msg;
             niTray.BalloonTipText = msg;
             niTray.Text = msg;
-            
+
             if (dtAlertTime.Hour == DateTime.Now.Hour &&
                 dtAlertTime.Minute == DateTime.Now.Minute &&
                 dtAlertTime.Second == DateTime.Now.Second)
             {
                 Stop();
                 Alert();
-            }
-        }
-
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            if (ofdAudio.ShowDialog() == DialogResult.OK)
-            {
-                txtFilename.Text = ofdAudio.FileName;
             }
         }
 
@@ -150,22 +236,6 @@ namespace CountdownTimer
 
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
-        {
-            Play();
-        }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                Minimize();
-            }
-            else
-            {
-                Restore();
-            }
-        }
 
         private void miRestore_Click(object sender, EventArgs e)
         {
@@ -177,56 +247,6 @@ namespace CountdownTimer
             Application.Exit();
         }
 
-        private void Play()
-        {
-            if (System.IO.File.Exists(txtFilename.Text))
-            {
-                sp.SoundLocation = txtFilename.Text;
-                sp.Play();
-            }
-        }
-
-        private void Stop()
-        {
-            nudHours.Enabled = true;
-            nudMinutes.Enabled = true;
-            btnStart.Enabled = true;
-            btnStop.Enabled = false;
-            tmrUpdate.Stop();
-            lblCountdown.Text = "00:00:00";
-
-            foreach (Control ctrl in groupBox1.Controls)
-            {
-                ctrl.Enabled = true;
-            }
-        }
-
-        private void Alert()
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                Restore();
-            }
-            MessageBox.Show(txtMessage.Text);
-            if (chkAudio.Checked)
-            {
-                Play();
-            }
-        }
-
-        private void Restore()
-        {
-            this.Visible = true;
-            niTray.Visible = false;
-            this.WindowState = FormWindowState.Normal;
-        }
-
-        private void Minimize()
-        {
-            this.WindowState = FormWindowState.Minimized;
-            this.Visible = false;
-            niTray.Visible = true;
-        }
 
         private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -241,17 +261,5 @@ namespace CountdownTimer
             }
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MessageBox.Show(Application.ExecutablePath);
-                Process.Start(Application.ExecutablePath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
     }
 }

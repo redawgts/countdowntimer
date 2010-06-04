@@ -302,7 +302,8 @@ namespace CountdownTimer
             // 
             // ofdAudio
             // 
-            this.ofdAudio.Filter = "Wave files (*.wav)|*.wav|All files (*.*)|*.*";
+            this.ofdAudio.Filter = "Supported Audio files|*.mp3;*.wav;*.wma|MP3 files (*.mp3)|*.mp3|Windows Media Aud" +
+                "io files (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files (*.*)|*.*";
             // 
             // niTray
             // 
@@ -319,25 +320,25 @@ namespace CountdownTimer
             this.toolStripMenuItem1,
             this.miExit});
             this.msTray.Name = "msTray";
-            this.msTray.Size = new System.Drawing.Size(185, 54);
+            this.msTray.Size = new System.Drawing.Size(174, 54);
             // 
             // miRestore
             // 
             this.miRestore.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.miRestore.Name = "miRestore";
-            this.miRestore.Size = new System.Drawing.Size(184, 22);
+            this.miRestore.Size = new System.Drawing.Size(173, 22);
             this.miRestore.Text = "&Restore Window";
             this.miRestore.Click += new System.EventHandler(this.miRestore_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(184, 22);
+            this.miExit.Size = new System.Drawing.Size(173, 22);
             this.miExit.Text = "E&xit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -370,8 +371,8 @@ namespace CountdownTimer
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Countdown Timer";
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.nudHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
